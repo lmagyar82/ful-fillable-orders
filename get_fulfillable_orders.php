@@ -1,14 +1,7 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
 
-if ($argc != 2) {
-    echo 'Ambiguous number of parameters!';
-    exit(1);
-}
-
-if (($stock = json_decode($argv[1])) == null) {
-    echo 'Invalid json!';
-    exit(1);
-}
+$stock = \Classes\ArgumentHelper::getStock($argc, $argv);
 
 $orders = [];
 $ordersH = [];
