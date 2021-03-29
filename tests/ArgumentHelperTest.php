@@ -1,6 +1,5 @@
 <?php
 
-
 use Classes\ArgumentHelper;
 use PHPUnit\Framework\TestCase;
 

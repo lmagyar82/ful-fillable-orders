@@ -1,7 +1,8 @@
 <?php
 namespace Classes;
 
-interface DataProviderInterface {
+interface DataProviderInterface
+{
     /**
      * @return array
      */

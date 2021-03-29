@@ -33,7 +33,7 @@ class FullFillableOrderServiceTest extends TestCase
 
     public function testProcessWithEmptyStock(): void
     {
-        $service = new FullFillableOrderService($this->csvContent, (object)json_decode('[]'));
+        $service = new FullFillableOrderService($this->csvContent, (object) json_decode('[]'));
         $result = $service->getProcessedData();
         $this->assertEquals([], $result, "Wrong results!");
     }

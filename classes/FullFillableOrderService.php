@@ -36,7 +36,7 @@ class FullFillableOrderService
      */
     private function getPriorityText(int $value): string
     {
-        switch($value) {
+        switch ($value) {
             case self::PRIORITY_HIGH: return 'HIGH';
             case self::PRIORITY_MEDIUM: return 'MEDIUM';
             case self::PRIORITY_LOW: return 'LOW';
@@ -117,4 +117,3 @@ class FullFillableOrderService
         $this->stock = $stock;
     }
 }
-

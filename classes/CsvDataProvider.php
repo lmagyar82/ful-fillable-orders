@@ -6,7 +6,6 @@ use Exception;
 
 class CsvDataProvider implements DataProviderInterface
 {
-
     /** @var string $fileName */
     private $fileName;
 
@@ -56,7 +55,6 @@ class CsvDataProvider implements DataProviderInterface
 
         return $this->header;
     }
-
 
     /**
      * @param string $fileName
