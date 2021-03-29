@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-class CsvDataLoader implements DataLoaderInterface
+class CsvDataProvider implements DataProviderInterface
 {
 
     /** @var string $fileName */

@@ -4,40 +4,43 @@ namespace Classes;
 
 class Table
 {
+    const SIZE = 20;
+
     /**
      * @param $header
      * @param $data
      */
-    public static function draw($ordersH, $orders, $stock)
+    public static function draw($header, $data)
     {
-        foreach ($ordersH as $h) {
-            echo str_pad($h, 20);
+        self::drawRow($header, true);
+
+        self::drawLine($header);
+
+        foreach ($data as $row) {
+            self::drawRow($row);
+        }
+    }
+
+    /**
+     * @param array $row
+     * @param bool $isUpper
+     */
+    private static function drawRow(array $row, bool $isUpper = false)
+    {
+        foreach ($row as $column) {
+            echo str_pad($isUpper ? strtoupper($column) : $column, self::SIZE);
         }
         echo "\n";
-        foreach ($ordersH as $h) {
-            echo str_repeat('=', 20);
+    }
+
+    /**
+     * @param array $header
+     */
+    private static function drawLine(array $header)
+    {
+        foreach ($header as $h) {
+            echo str_repeat('=', self::SIZE);
         }
         echo "\n";
-        foreach ($orders as $item) {
-            if ($stock->{$item['product_id']} >= $item['quantity']) {
-                foreach ($ordersH as $h) {
-                    if ($h == 'priority') {
-                        if ($item['priority'] == 1) {
-                            $text = 'low';
-                        } else {
-                            if ($item['priority'] == 2) {
-                                $text = 'medium';
-                            } else {
-                                $text = 'high';
-                            }
-                        }
-                        echo str_pad($text, 20);
-                    } else {
-                        echo str_pad($item[$h], 20);
-                    }
-                }
-                echo "\n";
-            }
-        }
     }
 }
