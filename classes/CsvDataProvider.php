@@ -2,6 +2,8 @@
 
 namespace Classes;
 
+use Exception;
+
 class CsvDataProvider implements DataProviderInterface
 {
 
@@ -16,21 +18,24 @@ class CsvDataProvider implements DataProviderInterface
 
     /**
      * CsvDataLoader constructor.
-     * @param string|null $fileName
+     * @param string $fileName
      */
-    public function __construct(string $fileName = null)
+    public function __construct(string $fileName)
     {
-        if (!empty($fileName)) {
-            $this->setFileName($fileName);
-        }
+        $this->setFileName($fileName);
     }
 
     /**
      * @return array
+     * @throws Exception
      */
     public function getData(): array
     {
         $csv = array_map('str_getcsv', $this->getFile());
+
+        if (!isset($csv[0])) {
+            throw new Exception('Data not found!');
+        }
         $this->setHeader($csv[0]);
         array_walk($csv, function (&$a) use ($csv) {
             $a = array_combine($this->getHeader(), $a);
@@ -58,6 +63,9 @@ class CsvDataProvider implements DataProviderInterface
      */
     public function setFileName(string $fileName): void
     {
+        if (!file_exists($fileName)) {
+            throw new Exception('File not found:' . $fileName);
+        }
         $this->fileName = $fileName;
     }
 

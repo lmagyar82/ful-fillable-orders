@@ -60,7 +60,7 @@ class FullFillableOrderService
     {
         $result = [];
         foreach ($this->getData() as $item) {
-            if ($this->getStock()->{$item['product_id']} >= $item['quantity']) {
+            if (isset($this->getStock()->{$item['product_id']}) && $this->getStock()->{$item['product_id']} >= $item['quantity']) {
                 $item['priority'] = $this->getPriorityText($item['priority']);
                 $result[] = $item;
             }
