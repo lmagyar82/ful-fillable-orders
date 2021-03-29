@@ -1,0 +1,17 @@
+{
+  "name": "lmagyar82/exercise",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Laszlo Magyar",
+      "email": "laszlo.magyar.82@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {"Classes\\": "classes/"}
+  }
+}
