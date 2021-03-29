@@ -2,26 +2,11 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $stock = \Classes\ArgumentHelper::getStock($argc, $argv);
+$dataLoader = new \Classes\CsvDataLoader('orders.csv');
 
-$orders = [];
-$ordersH = [];
 
-$row = 1;
-if (($handle = fopen('orders.csv', 'r')) !== false) {
-    while (($data = fgetcsv($handle)) !== false) {
-        if ($row == 1) {
-            $ordersH = $data;
-        } else {
-            $o = [];
-            for ($i = 0; $i < count($ordersH); $i++) {
-                $o[$ordersH[$i]] = $data[$i];
-            }
-            $orders[] = $o;
-        }
-        $row++;
-    }
-    fclose($handle);
-}
+$orders = $dataLoader->getData();
+$ordersH = $dataLoader->getHeader();
 
 usort($orders, function ($a, $b) {
     $pc = -1 * ($a['priority'] <=> $b['priority']);
