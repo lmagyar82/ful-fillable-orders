@@ -11,9 +11,15 @@
   ],
   "require": {
     "phpunit/phpunit": "^9.5",
-    "ext-json": "*"
+    "ext-json": "*",
+    "friendsofphp/php-cs-fixer": "^2.18"
   },
   "autoload": {
     "psr-4": {"Classes\\": "classes/"}
+  },
+  "scripts": {
+    "cs": [
+      "@php vendor/bin/php-cs-fixer fix --diff --ansi --dry-run"
+    ]
   }
 }

@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-class FullFillableOrderService
+class FulFillableOrderService
 {
     const PRIORITY_LOW = 1;
     const PRIORITY_MEDIUM = 2;

@@ -1,3 +1,28 @@
+# Webshippy FulFillable Service
+
+## Usage
+
+### Install dependencies
+```
+composer install 
+```
+### Start service
+Arguments:
+* current stock in json string, format : ```{"product_id":stock amount, ...}```
+```
+php get_fulfillable_orders.php '{"1":2,"2":3,"3":1}'
+```
+### Start unit tests
+```
+php ./vendor/bin/phpunit
+```
+
+### Code style check
+```
+composer cs
+```
+
+
 # Webshippy refactoring exercise
 Please refactor the included service.
 
