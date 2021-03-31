@@ -14,20 +14,17 @@ class FulFillableOrderService
     private $header;
     /** @var array $data */
     private $data;
-    /** @var object $stock */
-    private $stock;
 
     /**
      * @param DataProviderInterface $dataLoader
      * @param object $stock
      */
-    public function __construct(DataProviderInterface $dataLoader, object $stock)
+    public function __construct(DataProviderInterface $dataLoader)
     {
         $this->dataLoader = $dataLoader;
         $this->setData($this->dataLoader->getData());
         $this->setHeader($this->dataLoader->getHeader());
         $this->sortByPriorityAndDate();
-        $this->setStock($stock);
     }
 
     /**
@@ -54,13 +51,14 @@ class FulFillableOrderService
     }
 
     /**
+     * @param object $stock
      * @return array
      */
-    public function getProcessedData(): array
+    public function getProcessedData(object $stock): array
     {
         $result = [];
         foreach ($this->getData() as $item) {
-            if (isset($this->getStock()->{$item['product_id']}) && $this->getStock()->{$item['product_id']} >= $item['quantity']) {
+            if (isset($stock->{$item['product_id']}) && $stock->{$item['product_id']} >= $item['quantity']) {
                 $item['priority'] = $this->getPriorityText($item['priority']);
                 $result[] = $item;
             }
@@ -99,21 +97,5 @@ class FulFillableOrderService
     public function setData(array $data): void
     {
         $this->data = $data;
-    }
-
-    /**
-     * @return object
-     */
-    public function getStock(): object
-    {
-        return $this->stock;
-    }
-
-    /**
-     * @param object $stock
-     */
-    public function setStock(object $stock): void
-    {
-        $this->stock = $stock;
     }
 }

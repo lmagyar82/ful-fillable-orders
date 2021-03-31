@@ -8,6 +8,6 @@ use Classes\Table;
 require __DIR__ . '/vendor/autoload.php';
 
 $dataLoader = new CsvDataProvider('orders.csv');
-$orderService = new FulFillableOrderService($dataLoader, ArgumentHelper::getStock($argc, $argv));
+$orderService = new FulFillableOrderService($dataLoader);
 
-Table::draw($orderService->getHeader(), $orderService->getProcessedData());
+Table::draw($orderService->getHeader(), $orderService->getProcessedData(ArgumentHelper::getStock($argc, $argv)));

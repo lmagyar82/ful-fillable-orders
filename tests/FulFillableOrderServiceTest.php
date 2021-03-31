@@ -26,22 +26,22 @@ class FulFillableOrderServiceTest extends TestCase
             ["product_id" => "2", "quantity" => "2", "priority" => "LOW", "created_at" => "2021-03-24 11:02:06"],
             ["product_id" => "1", "quantity" => "1", "priority" => "LOW", "created_at" => "2021-03-25 19:08:22"]
         ];
-        $service = new FulFillableOrderService($this->csvContent, $this->stock);
-        $result = $service->getProcessedData();
+        $service = new FulFillableOrderService($this->csvContent);
+        $result = $service->getProcessedData($this->stock);
         $this->assertEquals($expected, $result, "Wrong results!");
     }
 
     public function testProcessWithEmptyStock(): void
     {
-        $service = new FulFillableOrderService($this->csvContent, (object) json_decode('[]'));
-        $result = $service->getProcessedData();
+        $service = new FulFillableOrderService($this->csvContent);
+        $result = $service->getProcessedData((object) json_decode('[]'));
         $this->assertEquals([], $result, "Wrong results!");
     }
 
     public function testProcessWithEmptyData(): void
     {
-        $service = new FulFillableOrderService(new CsvDataProvider('tests/testEmptyRows.csv'), $this->stock);
-        $result = $service->getProcessedData();
+        $service = new FulFillableOrderService(new CsvDataProvider('tests/testEmptyRows.csv'));
+        $result = $service->getProcessedData($this->stock);
         $this->assertEquals([], $result, "Wrong results!");
     }
 }
