@@ -49,10 +49,6 @@ class CsvDataProvider implements DataProviderInterface
      */
     public function getHeader(): array
     {
-        if (empty($this->header)) {
-            $this->getData();
-        }
-
         return $this->header;
     }
 

@@ -43,5 +43,13 @@ class FulFillableOrderServiceTest extends TestCase
         $service = new FulFillableOrderService(new CsvDataProvider('tests/testEmptyRows.csv'));
         $result = $service->getProcessedData($this->stock);
         $this->assertEquals([], $result, "Wrong results!");
+        $this->assertEquals(['product_id', 'quantity', 'priority', 'created_at'], $service->getHeader());
+    }
+
+    public function testProcessWrongPriority(): void
+    {
+        $this->expectException(Exception::class);
+        $service = new FulFillableOrderService(new CsvDataProvider('tests/testPriority.csv'));
+        $result = $service->getProcessedData($this->stock);
     }
 }

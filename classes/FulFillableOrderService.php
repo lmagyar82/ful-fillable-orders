@@ -2,6 +2,8 @@
 
 namespace Classes;
 
+use Exception;
+
 class FulFillableOrderService
 {
     const PRIORITY_LOW = 1;
@@ -17,7 +19,6 @@ class FulFillableOrderService
 
     /**
      * @param DataProviderInterface $dataLoader
-     * @param object $stock
      */
     public function __construct(DataProviderInterface $dataLoader)
     {
@@ -30,6 +31,7 @@ class FulFillableOrderService
     /**
      * @param int $value
      * @return string
+     * @throws Exception
      */
     private function getPriorityText(int $value): string
     {
@@ -39,7 +41,7 @@ class FulFillableOrderService
             case self::PRIORITY_LOW: return 'LOW';
         }
 
-        return (string) $value;
+        throw new Exception('Wrong priority value');
     }
 
     private function sortByPriorityAndDate(): void
@@ -53,6 +55,7 @@ class FulFillableOrderService
     /**
      * @param object $stock
      * @return array
+     * @throws Exception
      */
     public function getProcessedData(object $stock): array
     {
